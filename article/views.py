@@ -25,6 +25,7 @@ class UserRegisterView(APIView):
                 'user': serializer.data,
                 'token': token.key
             }
+            
             return Response(response) 
         return Response(serializer.errors)
 
