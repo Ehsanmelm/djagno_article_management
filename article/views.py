@@ -92,11 +92,25 @@ class ArticleView(APIView):
     serializer_class = ArticleSerializer
     
     def get(self,request , pk=None):
+        user=request.user
         if pk is None:
+
+            # this part is for showing just the author articles and all artile to admin but i comment that because i think it is better to show all article to everyone:
             
+            # ---------------------------------
+            # if user.role <3:
+            #     queryset = ArticleModel.objects.filter(author = user)
+
+            # else:
+            #     queryset = ArticleModel.objects.all()
+
+            # serializer = ArticleSerializer(queryset , many=True)
+            
+            # ---------------------------------
+
             queryset = ArticleModel.objects.all()
             serializer = ArticleSerializer(queryset , many=True)
-
+            
             return Response(serializer.data)
         else:
             try:
